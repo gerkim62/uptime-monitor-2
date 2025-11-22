@@ -120,7 +120,7 @@ const eslintConfig = [
             },
             {
               from: ['feature'],
-              allow: ['shared', 'feature'],
+              allow: ['shared'],
             },
             {
               from: ['routes'],
