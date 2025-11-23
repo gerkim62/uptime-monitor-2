@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useLoaderData } from '@tanstack/react-router'
 
 import {
   Activity,
@@ -7,7 +7,7 @@ import {
   Plus,
   TrendingUp,
 } from 'lucide-react'
-import { createServerFn } from '@tanstack/react-start'
+import type { Monitor, MonitorCheck } from '@/generated/prisma/client'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -19,46 +19,11 @@ import {
 import Header from '@/components/header'
 import StatCard from '@/components/start-card'
 import MonitorCard from '@/components/monitor-card'
+import getMonitors from '@/features/monitor/get-monitors'
 
 const App = () => {
-  const monitors = [
-    {
-      id: 1,
-      name: 'Main Website',
-      url: 'https://example.com',
-      status: 'UP',
-      statusSince: 'Nov 20, 2025',
-      statusDuration: '3 days ago',
-      uptime: '99.9%',
-      lastCheck: '2 min ago',
-      responseTime: '245ms',
-      statusCode: 200,
-    },
-    {
-      id: 2,
-      name: 'API Server',
-      url: 'https://api.example.com',
-      status: 'UP',
-      statusSince: 'Nov 15, 2025',
-      statusDuration: '8 days ago',
-      uptime: '100%',
-      lastCheck: '1 min ago',
-      responseTime: '120ms',
-      statusCode: 200,
-    },
-    {
-      id: 3,
-      name: 'Blog',
-      url: 'https://blog.example.com',
-      status: 'DOWN',
-      statusSince: 'Nov 23, 2025',
-      statusDuration: '2 hours ago',
-      uptime: '98.5%',
-      lastCheck: '30 sec ago',
-      responseTime: 'N/A',
-      statusCode: 503,
-    },
-  ]
+  const data = useLoaderData({ from: '/' })
+  const monitors: Array<Monitor & { lastCheck: MonitorCheck | null; uptimePercentage: number; statusSince: Date }> = data.monitors
 
   return (
     <div className="min-h-screen bg-background">
@@ -127,10 +92,8 @@ const App = () => {
 
 export const Route = createFileRoute('/')({
   component: App,
-  loader: createServerFn({
-    method: 'GET',
-  }).handler(async ({}) => {
-    // Placeholder for potential server-side data fetching
-    return {}
-  }),
+  loader: async () => {
+    const data = await getMonitors()
+    return data
+  }
 })
