@@ -1,12 +1,12 @@
 "use client"
 
+import * as React from "react"
+import { siGithub } from "simple-icons"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { LoadingSwap } from "@/components/ui/loading-swap"
 import { authClient } from "@/lib/auth-client"
-import * as React from "react"
-import { siGithub } from "simple-icons"
-import { toast } from "sonner"
 
 
 export default function SocialSignIn() {
