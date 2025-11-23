@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
+import { lastLoginMethod } from 'better-auth/plugins'
 import { env } from '../env'
 import { prisma } from './prisma'
 
@@ -21,5 +22,5 @@ export const auth = betterAuth({
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
-  plugins: [tanstackStartCookies()],
+  plugins: [tanstackStartCookies(), lastLoginMethod()],
 })
