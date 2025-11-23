@@ -7,6 +7,7 @@ import { Activity, AlertCircle, CheckCircle, Plus, TrendingUp } from 'lucide-rea
 import Header from '@/components/header';
 import StatCard from '@/components/start-card';
 import MonitorCard from '@/components/monitor-card';
+import { createServerFn } from '@tanstack/react-start';
 
 const App = () => {
   const monitors = [
@@ -111,4 +112,13 @@ const App = () => {
   );
 };
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  component: App
+  ,
+  loader: createServerFn({
+    method:"GET"
+  }).handler(async ({})=>{
+    // Placeholder for potential server-side data fetching
+    return {};
+  })
+})
