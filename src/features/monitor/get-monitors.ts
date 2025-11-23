@@ -1,5 +1,5 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn } from '@tanstack/react-start'
 
 const getMonitors = createServerFn({
-  method: "GET",
+  method: 'GET',
 })

@@ -1,13 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Activity, AlertCircle, CheckCircle, Plus, TrendingUp } from 'lucide-react';
-import Header from '@/components/header';
-import StatCard from '@/components/start-card';
-import MonitorCard from '@/components/monitor-card';
-import { createServerFn } from '@tanstack/react-start';
+import {
+  Activity,
+  AlertCircle,
+  CheckCircle,
+  Plus,
+  TrendingUp,
+} from 'lucide-react'
+import { createServerFn } from '@tanstack/react-start'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import Header from '@/components/header'
+import StatCard from '@/components/start-card'
+import MonitorCard from '@/components/monitor-card'
 
 const App = () => {
   const monitors = [
@@ -21,7 +32,7 @@ const App = () => {
       uptime: '99.9%',
       lastCheck: '2 min ago',
       responseTime: '245ms',
-      statusCode: 200
+      statusCode: 200,
     },
     {
       id: 2,
@@ -33,7 +44,7 @@ const App = () => {
       uptime: '100%',
       lastCheck: '1 min ago',
       responseTime: '120ms',
-      statusCode: 200
+      statusCode: 200,
     },
     {
       id: 3,
@@ -45,9 +56,9 @@ const App = () => {
       uptime: '98.5%',
       lastCheck: '30 sec ago',
       responseTime: 'N/A',
-      statusCode: 503
-    }
-  ];
+      statusCode: 503,
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,28 +69,28 @@ const App = () => {
         <div className="space-y-6">
           {/* Stats Overview */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            <StatCard 
-              title="Total Monitors" 
-              value="3" 
-              icon={Activity} 
+            <StatCard
+              title="Total Monitors"
+              value="3"
+              icon={Activity}
               variant="blue"
             />
-            <StatCard 
-              title="Online" 
-              value="2" 
-              icon={CheckCircle} 
+            <StatCard
+              title="Online"
+              value="2"
+              icon={CheckCircle}
               variant="green"
             />
-            <StatCard 
-              title="Offline" 
-              value="1" 
-              icon={AlertCircle} 
+            <StatCard
+              title="Offline"
+              value="1"
+              icon={AlertCircle}
               variant="red"
             />
-            <StatCard 
-              title="Avg Uptime" 
-              value="99.5%" 
-              icon={TrendingUp} 
+            <StatCard
+              title="Avg Uptime"
+              value="99.5%"
+              icon={TrendingUp}
               variant="purple"
             />
           </div>
@@ -90,7 +101,9 @@ const App = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <CardTitle className="text-2xl">Your Monitors</CardTitle>
-                  <CardDescription className="mt-1">Manage and track all your services</CardDescription>
+                  <CardDescription className="mt-1">
+                    Manage and track all your services
+                  </CardDescription>
                 </div>
                 <Button className="shadow-sm">
                   <Plus className="w-4 h-4 mr-2" />
@@ -109,16 +122,15 @@ const App = () => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
 export const Route = createFileRoute('/')({
-  component: App
-  ,
+  component: App,
   loader: createServerFn({
-    method:"GET"
-  }).handler(async ({})=>{
+    method: 'GET',
+  }).handler(async ({}) => {
     // Placeholder for potential server-side data fetching
-    return {};
-  })
+    return {}
+  }),
 })
